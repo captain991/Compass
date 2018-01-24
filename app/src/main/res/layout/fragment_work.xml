@@ -1,0 +1,178 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.captain.compass.fragment.WorkFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:padding="1dp"
+            android:hint="搜索输入运单号"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/lightGray" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_scan" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout style="@style/WorkItemStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="112"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="待配送" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/WorkItemStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="已签收" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout style="@style/WorkItemStyle">
+
+            <ImageView
+                android:layout_width="@dimen/work_item_icon_size"
+                android:layout_height="@dimen/work_item_icon_size"
+                android:src="@drawable/ic_scan_delivery" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="扫码派送" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_navigation"
+            style="@style/WorkItemStyle"
+            android:layout_marginLeft="1dp">
+
+            <ImageView
+                android:layout_width="@dimen/work_item_icon_size"
+                android:layout_height="@dimen/work_item_icon_size"
+                android:src="@drawable/ic_navigation" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="配送导航" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp">
+
+        <LinearLayout
+            style="@style/WorkItemStyle"
+            android:layout_marginLeft="1dp">
+
+            <ImageView
+                android:layout_width="@dimen/work_item_icon_size"
+                android:layout_height="@dimen/work_item_icon_size"
+                android:src="@drawable/ic_client" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="客户" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/WorkItemStyle"
+            android:layout_marginLeft="1dp">
+
+            <ImageView
+                android:layout_width="@dimen/work_item_icon_size"
+                android:layout_height="@dimen/work_item_icon_size"
+                android:src="@drawable/ic_car" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="车辆信息" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/WorkItemStyle"
+            android:layout_marginLeft="1dp">
+
+            <ImageView
+                android:layout_width="@dimen/work_item_icon_size"
+                android:layout_height="@dimen/work_item_icon_size"
+                android:src="@drawable/ic_package" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="包裹状态" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

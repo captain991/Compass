@@ -1,0 +1,210 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.captain.compass.fragment.MineFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"
+        android:padding="20dp">
+
+        <com.example.captain.compass.widget.RoundImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_galaxy" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_avatar"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/iv_avatar"
+            android:text="韩梅梅"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_name"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="10dp"
+            android:text="182****4829"
+            android:textColor="@android:color/white" />
+
+
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_name"
+            android:layout_below="@+id/tv_tel"
+            android:layout_marginTop="10dp"
+            android:text="顺丰快递"
+            android:textColor="@android:color/white" />
+
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_light" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <ImageView
+            android:id="@+id/iv_template"
+            android:layout_width="@dimen/mine_item_icon_size"
+            android:layout_height="@dimen/mine_item_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_template" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_template"
+            android:text="短信模板" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_width="@dimen/mine_item_icon_size"
+            android:layout_height="@dimen/mine_item_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_setting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_setting"
+            android:text="设置" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <ImageView
+            android:id="@+id/iv_feedback"
+            android:layout_width="@dimen/mine_item_icon_size"
+            android:layout_height="@dimen/mine_item_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_feedback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_feedback"
+            android:text="意见反馈" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp">
+
+        <ImageView
+            android:id="@+id/iv_message"
+            android:layout_width="@dimen/mine_item_icon_size"
+            android:layout_height="@dimen/mine_item_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_message" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_message"
+            android:text="消息" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp">
+
+        <ImageView
+            android:id="@+id/iv_about_us"
+            android:layout_width="@dimen/mine_item_icon_size"
+            android:layout_height="@dimen/mine_item_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_about_us" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_about_us"
+            android:text="关于我们" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+
+
+</LinearLayout>
