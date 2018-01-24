@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1D97E7</color>
+    <color name="colorPrimaryDark">#0F75FE</color>
+    <color name="colorAccent">#5D25FD</color>
+
+    <!--通常的灰色都取8a8a8a-->
+    <color name="gray">#8a8a8a</color>
+    <color name="lightGray">#f2f3f3</color>
+
+    <color name="transparentWhite">#FCFCFC</color>
+</resources>
