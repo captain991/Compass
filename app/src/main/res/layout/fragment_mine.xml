@@ -17,7 +17,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_galaxy" />
+            android:src="@drawable/ic_deer" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -120,6 +120,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_feedback"
         style="@style/ItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">

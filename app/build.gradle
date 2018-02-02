@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    compileSdkVersion 26
+
+    def versionPropsFile = file('version.properties')
+    def buildVersion
+
     signingConfigs {
         config {
             keyAlias 'captain'
@@ -9,7 +14,16 @@ android {
             storePassword '14lhyht'
         }
     }
-    compileSdkVersion 26
+
+    /*Setting default value for buildVersion which is the last incremented value stored in the file */
+    if (versionPropsFile.canRead()) {
+        Properties versionProps = new Properties()
+        versionProps.load(new FileInputStream(versionPropsFile))
+        buildVersion = versionProps['BUILD_VERSION'].toInteger()
+    } else {
+        throw new FileNotFoundException("Could not read version.properties!")
+    }
+
     defaultConfig {
         applicationId "com.example.captain.compass"
         minSdkVersion 15
@@ -23,16 +37,44 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.config
+        }
     }
     // apk name
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "compass_${variant.variantData.variantConfiguration.buildType.name}_v${variant.versionCode}.apk"
+            outputFileName = "compass_${variant.variantData.variantConfiguration.buildType.name}" +
+                    "_v${variant.versionCode}(${buildVersion}).apk"
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // Hook to check if the release/debug task is among the tasks to be executed.
+    //Let's make use of it
+    gradle.taskGraph.whenReady { taskGraph ->
+        if (taskGraph.hasTask(assembleDebug)) {  /* when run debug task */
+//            autoIncrementBuildNumber()
+        } else if (taskGraph.hasTask(assembleRelease)) { /* when run release task */
+            autoIncrementBuildNumber()
+        }
+    }
+
+    /*Wrapping inside a method avoids auto incrementing on every gradle task run. Now it runs only when we build apk*/
+    ext.autoIncrementBuildNumber = {
+
+        if (versionPropsFile.canRead()) {
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+            buildVersion = versionProps['BUILD_VERSION'].toInteger() + 1
+            versionProps['BUILD_VERSION'] = buildVersion.toString()
+            versionProps.store(new FileOutputStream(versionPropsFile), null)
+        } else {
+            throw new FileNotFoundException("Could not read version.properties!")
+        }
     }
 }
 
@@ -43,9 +85,11 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation files('libs/AMap3DMap_5.5.0_AMapNavi_5.4.0_AMapSearch_5.5.0_AMapLocation_3.6.1_20171107.jar')
     implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     compile 'cn.yipianfengye.android:zxing-library:2.2'
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'org.greenrobot:eventbus:3.1.1'
 
     compile "io.reactivex:rxandroid:1.2.1"
     compile "io.reactivex:rxjava:1.3.0"

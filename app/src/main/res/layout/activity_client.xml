@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.captain.compass.activity.ClientActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title="客户" />
+
+    <LinearLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="二次派件客户" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="拒收客户" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="VIP客户" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="黑名单" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+</LinearLayout>

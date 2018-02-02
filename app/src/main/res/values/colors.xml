@@ -2,11 +2,13 @@
 <resources>
     <color name="colorPrimary">#1D97E7</color>
     <color name="colorPrimaryDark">#0F75FE</color>
-    <color name="colorAccent">#5D25FD</color>
+    <color name="colorAccent">#FF4D56</color>
 
     <!--通常的灰色都取8a8a8a-->
     <color name="gray">#8a8a8a</color>
     <color name="lightGray">#f2f3f3</color>
-
+    <color name="orange">#FE7B26</color>
+    <color name="transparent">#00000000</color>
     <color name="transparentWhite">#FCFCFC</color>
+    <color name="red">#FE3E47</color>
 </resources>

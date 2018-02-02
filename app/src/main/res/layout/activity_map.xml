@@ -6,45 +6,45 @@
     android:layout_height="match_parent"
     tools:context="com.example.captain.compass.activity.MapActivity">
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_my_location"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="140dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_aim"
+        app:backgroundTint="@android:color/white"
+        app:borderWidth="0dp"
+        app:fabSize="mini" />
 
-            <com.amap.api.maps.TextureMapView
-                android:id="@+id/texture_map_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btn_scan"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_scan"
-                app:backgroundTint="@color/colorPrimary"
-                app:elevation="5dp" />
-        </FrameLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_show_path"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_path"
+        app:backgroundTint="@android:color/white"
+        app:borderWidth="0dp"
+        app:fabSize="mini" />
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/navigation_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/navigation_view_header"
-            app:menu="@menu/menu_navigation_view_body" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_navigate"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_navigate"
+        app:backgroundTint="@android:color/white"
+        app:borderWidth="0dp"
+        app:fabSize="mini" />
 
-    </android.support.v4.widget.DrawerLayout>
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Light" />
 </FrameLayout>

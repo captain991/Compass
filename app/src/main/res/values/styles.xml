@@ -9,6 +9,9 @@
         <item name="android:windowBackground">@color/lightGray</item>
     </style>
 
+
+    <style name="TransparentStatus" parent="AppTheme" />
+
     <style name="ItemStyle">
         <!--<item name="android:layout_height">@dimen/mine_item_height</item>-->
         <item name="android:layout_height">wrap_content</item>
