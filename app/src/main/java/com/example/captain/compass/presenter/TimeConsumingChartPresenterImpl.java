@@ -9,6 +9,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -51,22 +52,37 @@ public class TimeConsumingChartPresenterImpl extends AbstractLineChartPresenter 
         List<List<Entry>> entries = new ArrayList<>();
         ArrayList<Entry> yVals1 = new ArrayList<>();
 
-        yVals1.add(new Entry(1, 2.7f));
-        yVals1.add(new Entry(2, 5.2f));
-        yVals1.add(new Entry(3, 7));
-        yVals1.add(new Entry(4, 3.5f));
-        yVals1.add(new Entry(5, 6));
-        yVals1.add(new Entry(6, 2.8f));
-        yVals1.add(new Entry(7, 5.1f));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2018, 1, 1);
+        yVals1.add(new Entry(1, 2.7f, calendar.getTime()));
+        calendar.set(2018, 1, 2);
+        yVals1.add(new Entry(2, 5.2f, calendar.getTime()));
+        calendar.set(2018, 1, 3);
+        yVals1.add(new Entry(3, 7, calendar.getTime()));
+        calendar.set(2018, 1, 4);
+        yVals1.add(new Entry(4, 3.5f, calendar.getTime()));
+        calendar.set(2018, 1, 5);
+        yVals1.add(new Entry(5, 6, calendar.getTime()));
+        calendar.set(2018, 1, 6);
+        yVals1.add(new Entry(6, 2.8f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(7, 5.1f, calendar.getTime()));
 
         ArrayList<Entry> yVals2 = new ArrayList<>();
-        yVals2.add(new Entry(1, -9));
-        yVals2.add(new Entry(2, -2));
-        yVals2.add(new Entry(3, -1));
-        yVals2.add(new Entry(4, -7));
-        yVals2.add(new Entry(5, -2));
-        yVals2.add(new Entry(6, -7));
-        yVals2.add(new Entry(7, -2));
+        calendar.set(2018, 1, 1);
+        yVals2.add(new Entry(1, -9, calendar.getTime()));
+        calendar.set(2018, 1, 2);
+        yVals2.add(new Entry(2, -2, calendar.getTime()));
+        calendar.set(2018, 1, 3);
+        yVals2.add(new Entry(3, -1, calendar.getTime()));
+        calendar.set(2018, 1, 4);
+        yVals2.add(new Entry(4, -7, calendar.getTime()));
+        calendar.set(2018, 1, 5);
+        yVals2.add(new Entry(5, -2, calendar.getTime()));
+        calendar.set(2018, 1, 6);
+        yVals2.add(new Entry(6, -7, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(7, -2, calendar.getTime()));
         entries.add(yVals1);
         entries.add(yVals2);
         return entries;
@@ -80,4 +96,5 @@ public class TimeConsumingChartPresenterImpl extends AbstractLineChartPresenter 
         rightAxis.setAxisMaximum(0);
         rightAxis.setAxisMinimum(-10);
     }
+
 }

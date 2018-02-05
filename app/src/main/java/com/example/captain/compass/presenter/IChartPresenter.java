@@ -7,5 +7,5 @@ package com.example.captain.compass.presenter;
 public interface IChartPresenter {
     void initToolbar();
     void initChart();
-    void getChartData();
+    void updateChartData();
 }

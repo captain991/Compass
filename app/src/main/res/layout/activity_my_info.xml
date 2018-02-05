@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.captain.compass.activity.MyInfoActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title="我的资料" />
+
+    <LinearLayout
+        android:id="@+id/layout_avatar"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="头像"
+            android:textColor="@android:color/black" />
+
+        <com.example.captain.compass.widget.RoundImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_deer" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_name"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="韩梅梅" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_tel"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="135****3918" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_id_number"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证号"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="319320********9218" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_company"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="快递公司"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="顺丰" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_branch"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="网点名称"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_log_off"
+        style="@style/ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/orange" />
+
+</LinearLayout>

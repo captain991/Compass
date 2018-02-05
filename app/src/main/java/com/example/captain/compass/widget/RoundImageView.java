@@ -39,12 +39,13 @@ public class RoundImageView extends AppCompatImageView {
         super(context, attrs);
         mPaint = new Paint();
         mPaint.setColor(Color.RED);
+        mPaint.setAntiAlias(true);
 //
 //        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView);
 //        int bitmapRes = ta.getInteger(R.styleable.RoundImageView_source, 0);
 //        mBitmap = BitmapFactory.decodeResource(context.getResources(), bitmapRes);
 //        ta.recycle();
-        mBitmap=((BitmapDrawable)getDrawable()).getBitmap();
+        mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
         mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 //        mShapeDrawable = new ShapeDrawable(new OvalShape());
 //        mShapeDrawable.setBounds(0, 0, getWidth(), getHeight());

@@ -2,6 +2,7 @@ package com.example.captain.compass.presenter;
 
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.widget.LinearLayout;
 
 import com.example.captain.compass.R;
 import com.github.mikephil.charting.charts.LineChart;
@@ -13,7 +14,11 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by captain on 2018/2/2.
@@ -65,6 +70,9 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
+        xAxis.setLabelRotationAngle(-45);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setTextColor(ColorTemplate.getHoloBlue());
@@ -78,11 +86,11 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
         rightAxis.setGranularityEnabled(false);
 
         updateYAxis(leftAxis, rightAxis);
-        view.getChart(null, lineChart);
+        addView2Layout();
     }
 
     @Override
-    public void getChartData() {
+    public void updateChartData() {
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0) {
             List<List<Entry>> entries = getEntries();
             for (int i = 0; i < entries.size(); i++) {
@@ -113,8 +121,13 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
 
             // set data
             lineChart.setData(data);
+            lineChart.getXAxis().setValueFormatter(((value, axis) ->
+                    new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA).format(
+                            (Date) (getEntries().get(0).get((int) value - 1).getData()))
+            ));
             lineChart.invalidate();
         }
+
     }
 
     abstract public List<LineDataSet> getDataSets();
@@ -122,4 +135,11 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
     abstract public List<List<Entry>> getEntries();
 
     abstract public void updateYAxis(YAxis leftAxis, YAxis rightAxis);
+
+    public void addView2Layout() {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        view.addView(lineChart, layoutParams);
+    }
+
 }

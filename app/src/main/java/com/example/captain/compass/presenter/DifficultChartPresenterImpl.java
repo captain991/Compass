@@ -1,6 +1,8 @@
 package com.example.captain.compass.presenter;
 
 import android.graphics.Color;
+import android.widget.LinearLayout;
+
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -72,11 +74,13 @@ public class DifficultChartPresenterImpl extends AbstractChartPresenter {
         pieChart.setEntryLabelTextSize(12f);
         // undo all highlights
         pieChart.highlightValues(null);
-        view.getChart(pieChart, null);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        view.addView(pieChart, layoutParams);
     }
 
     @Override
-    public void getChartData() {
+    public void updateChartData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of

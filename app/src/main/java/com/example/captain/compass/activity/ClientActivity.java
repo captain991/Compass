@@ -11,7 +11,7 @@ import com.example.captain.compass.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ClientActivity extends AppCompatActivity {
+public class ClientActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 

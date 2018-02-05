@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.captain.compass.R;
 import com.example.captain.compass.activity.FormManageActivity;
+import com.example.captain.compass.activity.MyInfoActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -49,11 +50,14 @@ public class MineFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.layout_feedback})
+    @OnClick({R.id.layout_my_info, R.id.layout_feedback})
     public void itemClick(View view) {
         switch (view.getId()) {
             case R.id.layout_feedback:
                 FormManageActivity.launchActivity(getActivity());
+                break;
+            case R.id.layout_my_info:
+                MyInfoActivity.launchActivity(getActivity());
                 break;
             default:
                 break;

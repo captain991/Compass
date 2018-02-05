@@ -16,8 +16,6 @@ import com.example.captain.compass.presenter.TimeConsumingChartPresenterImpl;
 import com.example.captain.compass.presenter.TripTimeConsumingChartPresenterImpl;
 import com.example.captain.compass.presenter.WorkLoadChartPresenterImpl;
 import com.example.captain.compass.view.IChartView;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.charts.PieChart;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,13 +51,13 @@ public class StatisticsChartActivity extends BaseActivity implements IChartView 
     @BindView(R.id.btn_date_to)
     Button btnDateTo;
 
-    private PieChart pieChart;
-    private LineChart lineChart;
+    //    private PieChart pieChart;
+//    private LineChart lineChart;
     private AbstractChartPresenter presenter;
     Calendar calendar = Calendar.getInstance();
     private Date dateFrom = new Date();
     private Date dateTo = new Date();
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM//dd", Locale.CHINA);
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA);
 
 
     public static void launchActivity(Context context, int type) {
@@ -73,31 +71,25 @@ public class StatisticsChartActivity extends BaseActivity implements IChartView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics_chart);
         ButterKnife.bind(this);
-        initPresenter();
         initView();
+        initListener();
+        initPresenter();
         presenter.bindView(this, this);
         presenter.initToolbar();
         presenter.initChart();
-        presenter.getChartData();
-        initListener();
+        presenter.updateChartData();
     }
 
     public void initView() {
-        btnDateFrom.setText(simpleDateFormat.format(dateFrom));
-        btnDateTo.setText(simpleDateFormat.format(dateTo));
+        calendar.set(2018, 1, 1);
+        btnDateFrom.setText(simpleDateFormat.format(calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        btnDateTo.setText(simpleDateFormat.format(calendar.getTime()));
     }
 
     @Override
-    public void getChart(PieChart pieChart, LineChart lineChart) {
-        this.pieChart = pieChart;
-        this.lineChart = lineChart;
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        if (pieChart != null) {
-            layoutChart.addView(pieChart, layoutParams);
-        }
-        if (lineChart != null)
-            layoutChart.addView(lineChart, layoutParams);
+    public void addView(View view, LinearLayout.LayoutParams layoutParams) {
+        layoutChart.addView(view, layoutParams);
     }
 
     public void initListener() {
