@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.captain.compass.IntegerPercentFormatter;
 import com.example.captain.compass.R;
 import com.example.captain.compass.widget.ScaleCircleNavigator;
 import com.github.mikephil.charting.charts.CombinedChart;
@@ -161,7 +162,7 @@ public class TripTimeConsumingChartPresenterImpl extends AbstractLineChartPresen
         leftAxis.setDrawGridLines(false);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         leftAxis.setAxisMaximum(100f);
-        leftAxis.setValueFormatter(new PercentFormatter());
+        leftAxis.setValueFormatter(new IntegerPercentFormatter());
 
         XAxis xAxis = combinedChart.getXAxis();
         xAxis.setAxisMinimum(0.5f);
@@ -184,10 +185,16 @@ public class TripTimeConsumingChartPresenterImpl extends AbstractLineChartPresen
 
         XAxis xAxis = combinedChart.getXAxis();
         xAxis.setValueFormatter(((value, axis) ->
-                new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA).format(
+                "1/" + new SimpleDateFormat("MM/dd", Locale.CHINA).format(
                         (Date) (getLineData().getDataSets().get(0).getEntryForIndex((int) value - 1).getData()))
         ));
         combinedChart.invalidate();
+
+        lineChart.getXAxis().setValueFormatter(((value, axis) ->
+                "1/" + new SimpleDateFormat("MM/dd", Locale.CHINA).format(
+                        (Date) (getLineData().getDataSets().get(0).getEntryForIndex((int) value - 1).getData()))
+        ));
+        lineChart.invalidate();
     }
 
     public LineData getLineData() {
@@ -255,10 +262,9 @@ public class TripTimeConsumingChartPresenterImpl extends AbstractLineChartPresen
         barData.addDataSet(dataSet);
         barData.setHighlightEnabled(false);
         float barWidth = 0.45f; // x2 dataset
-        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
         barData.setBarWidth(barWidth);
-        barData.setValueFormatter(new PercentFormatter());
+        barData.setValueFormatter(new IntegerPercentFormatter());
         return barData;
     }
 

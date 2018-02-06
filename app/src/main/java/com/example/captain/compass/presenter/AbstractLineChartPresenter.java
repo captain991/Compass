@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.widget.LinearLayout;
 
+import com.example.captain.compass.IntegerValueFormatter;
 import com.example.captain.compass.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -15,7 +16,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -118,11 +118,12 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
             data.setHighlightEnabled(false);
             data.setValueTextColor(Color.BLACK);
             data.setValueTextSize(9f);
+            data.setValueFormatter(new IntegerValueFormatter());
 
             // set data
             lineChart.setData(data);
             lineChart.getXAxis().setValueFormatter(((value, axis) ->
-                    new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA).format(
+                    new SimpleDateFormat("MM/dd", Locale.CHINA).format(
                             (Date) (getEntries().get(0).get((int) value - 1).getData()))
             ));
             lineChart.invalidate();

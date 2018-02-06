@@ -60,7 +60,9 @@
         <activity android:name=".activity.ClientActivity" />
         <activity android:name=".activity.StatisticsChartActivity" />
         <activity android:name=".activity.FormListWithTabActivity" />
-        <activity android:name=".activity.MyInfoActivity"></activity>
+        <activity android:name=".activity.MyInfoActivity" />
+        <activity android:name=".activity.SmsTemplateListActivity" />
+        <activity android:name=".activity.SmsTemplateActivity"></activity>
     </application>
 
 </manifest>

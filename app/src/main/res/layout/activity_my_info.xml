@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:id="@+id/layout_avatar"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top"
         android:gravity="center_vertical">
@@ -44,7 +44,7 @@
 
     <LinearLayout
         android:id="@+id/layout_name"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">
 
@@ -61,7 +61,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="韩梅梅" />
+            android:text="李明" />
 
         <ImageView
             android:layout_width="15dp"
@@ -71,7 +71,7 @@
 
     <LinearLayout
         android:id="@+id/layout_tel"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">
 
@@ -88,7 +88,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="135****3918" />
+            android:text="15913145200" />
 
         <ImageView
             android:layout_width="15dp"
@@ -98,7 +98,7 @@
 
     <LinearLayout
         android:id="@+id/layout_id_number"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">
 
@@ -115,7 +115,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="319320********9218" />
+            android:text="123456201810017890" />
 
         <ImageView
             android:layout_width="15dp"
@@ -125,7 +125,7 @@
 
     <LinearLayout
         android:id="@+id/layout_company"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
@@ -142,7 +142,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="顺丰" />
+            android:text="中通" />
 
         <ImageView
             android:layout_width="15dp"
@@ -152,7 +152,7 @@
 
     <LinearLayout
         android:id="@+id/layout_branch"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">
 
@@ -167,7 +167,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="武汉大学中通网点" />
 
         <ImageView
             android:layout_width="15dp"
@@ -177,7 +179,7 @@
 
     <TextView
         android:id="@+id/tv_log_off"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top"
         android:gravity="center"

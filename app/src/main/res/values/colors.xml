@@ -4,8 +4,9 @@
     <color name="colorPrimaryDark">#0F75FE</color>
     <color name="colorAccent">#FF4D56</color>
 
-    <!--通常的灰色都取8a8a8a-->
-    <color name="gray">#8a8a8a</color>
+    <!--通常的灰色都取f2f3f3-->
+    <color name="darkGray">#8a8a8a</color>
+    <color name="gray">#e2e1e1</color>
     <color name="lightGray">#f2f3f3</color>
     <color name="orange">#FE7B26</color>
     <color name="transparent">#00000000</color>

@@ -16,7 +16,7 @@
         app:title="客户" />
 
     <LinearLayout
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
@@ -34,7 +34,7 @@
     </LinearLayout>
 
     <LinearLayout
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
@@ -70,7 +70,7 @@
     </LinearLayout>
 
     <LinearLayout
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 

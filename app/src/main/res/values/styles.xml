@@ -16,7 +16,12 @@
         <!--<item name="android:layout_height">@dimen/mine_item_height</item>-->
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/mine_item_padding</item>
-        <item name="android:background">@android:color/white</item>
+        <item name="android:background">@drawable/bg_clickable</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ClickableItemStyle" parent="ItemStyle">
+        <item name="android:clickable">true</item>
     </style>
 
     <style name="WorkItemStyle">

@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity {
     protected ProgressDialog progressdialog;
-    public Toast toast;
 
     public void showLoading(String msg) {
         if (progressdialog != null && progressdialog.isShowing())
@@ -33,11 +32,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void showToast(String msg) {
-        if (toast == null)
-            toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-        else
-            toast.setText(msg);
-        toast.show();
-    }
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
+    }
 }

@@ -27,7 +27,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="韩梅梅"
+            android:text="李明"
             android:textColor="@android:color/white" />
 
         <ImageView
@@ -38,129 +38,106 @@
     </LinearLayout>
 
 
-    <RelativeLayout
-        style="@style/ItemStyle"
+    <LinearLayout
+        android:id="@+id/layout_sms_template"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
         <ImageView
-            android:id="@+id/iv_template"
             android:layout_width="@dimen/mine_item_icon_size"
             android:layout_height="@dimen/mine_item_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_template" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black"
-            android:layout_toRightOf="@+id/iv_template"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="短信模板" />
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        style="@style/ItemStyle"
+    <LinearLayout
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
         <ImageView
-            android:id="@+id/iv_setting"
             android:layout_width="@dimen/mine_item_icon_size"
             android:layout_height="@dimen/mine_item_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_setting" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black"
-            android:layout_toRightOf="@+id/iv_setting"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="设置" />
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_feedback"
-        style="@style/ItemStyle"
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/mine_item_margin_top">
 
         <ImageView
-            android:id="@+id/iv_feedback"
             android:layout_width="@dimen/mine_item_icon_size"
             android:layout_height="@dimen/mine_item_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_feedback" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black"
-            android:layout_toRightOf="@+id/iv_feedback"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="意见反馈" />
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        style="@style/ItemStyle"
+    <LinearLayout
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">
 
         <ImageView
-            android:id="@+id/iv_message"
             android:layout_width="@dimen/mine_item_icon_size"
             android:layout_height="@dimen/mine_item_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_message" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_message"
-            android:textColor="@android:color/black"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="消息" />
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        style="@style/ItemStyle"
+    <LinearLayout
+        style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">
 
@@ -168,26 +145,21 @@
             android:id="@+id/iv_about_us"
             android:layout_width="@dimen/mine_item_icon_size"
             android:layout_height="@dimen/mine_item_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_about_us" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_about_us"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="关于我们" />
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow" />
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

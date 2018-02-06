@@ -45,21 +45,13 @@ public class MyInfoActivity extends BaseActivity {
     public void itemClick(View view) {
         switch (view.getId()) {
             case R.id.layout_name:
+                showInputDialog("", "请输入姓名", InputType.TYPE_CLASS_TEXT,"李明");
+                break;
             case R.id.layout_tel:
+                showInputDialog("", "请输入手机号", InputType.TYPE_CLASS_PHONE,"15913145200");
+                break;
             case R.id.layout_id_number:
-                final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(this);
-                builder.setTitle("标题")
-                        .setPlaceholder("请输入")
-                        .setInputType(InputType.TYPE_CLASS_TEXT)
-                        .addAction("取消", ((dialog, index) -> dialog.dismiss()))
-                        .addAction("确定", (dialog, index) -> {
-                            CharSequence text = builder.getEditText().getText();
-                            if (text != null && text.length() > 0) {
-                                dialog.dismiss();
-                            } else {
-                                showToast("内容不能为空");
-                            }
-                        }).show();
+                showInputDialog("", "请输入身份证号", InputType.TYPE_CLASS_TEXT,"123456201810017890");
                 break;
             case R.id.layout_company:
                 String[] items = new String[]{"顺丰快递", "申通快递", "韵达快递", "圆通快递", "宅急送"};
@@ -68,9 +60,8 @@ public class MyInfoActivity extends BaseActivity {
                         .create().show();
                 break;
             case R.id.layout_branch:
-                String[] items2 = new String[]{"北京海淀区北京邮电大学快递分部", "北京中关村分部", "北京主城区公司海淀区西郊服务部",
-                        "北京市海淀锦绣大地", "北京海淀区巨山分部", "北京海淀区联想桥分部", "北京朝阳区朝阳门营业部","北京西城月坛营业点",
-                "北京西城区宣武公司宣武寄存点分部"};
+                String[] items2 = new String[]{"地大中通网点", "丁字桥中通网点", "方家嘴中通网点", "傅家坡中通网点",
+                        "积玉桥中通网点", "武大中通网点", "武昌中通网点", "杨家湾中通网点", "阅马场中通网点"};
                 new AlertDialog.Builder(this)
                         .setItems(items2, (dialog, which) -> showToast(items2[which]))
                         .create().show();
@@ -78,5 +69,22 @@ public class MyInfoActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    public void showInputDialog(String title, String placeHolder, int inputType, String hint) {
+        final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(this);
+        builder.setTitle(title)
+                .setPlaceholder(placeHolder)
+                .setInputType(inputType)
+                .addAction("取消", ((dialog, index) -> dialog.dismiss()))
+                .addAction("确定", (dialog, index) -> {
+                    CharSequence text = builder.getEditText().getText();
+                    if (text != null && text.length() > 0) {
+                        dialog.dismiss();
+                    } else {
+                        showToast("内容不能为空");
+                    }
+                }).show();
+        builder.getEditText().setText(hint);
     }
 }

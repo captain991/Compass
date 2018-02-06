@@ -17,7 +17,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
     private static DbHelper instance = null;
 
-    String CREATE_TABLE_ORDER = "CREATE TABLE form (" +
+    String CREATE_TABLE_FORM = "CREATE TABLE form (" +
             " form_id TEXT PRIMARY KEY," +
             " sender_tel TEXT," +
             " receiver_name TEXT," +
@@ -27,6 +27,14 @@ public class DbHelper extends SQLiteOpenHelper {
             " receiver_latitude NUMERIC," +
             " receiver_longitude NUMERIC," +
             " state INTEGER" +
+            ")";
+
+    String CREATE_TABLE_SMS_TEMPLATE = "CREATE TABLE sms_template (" +
+            "user_id INTEGER," +
+            "template_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "title TEXT," +
+            "content TEXT," +
+            "update_time INTEGER" +
             ")";
 
     public static DbHelper getInstance() {
@@ -46,7 +54,11 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
-        db.execSQL(CREATE_TABLE_ORDER);
+        db.beginTransaction();
+        db.execSQL(CREATE_TABLE_FORM);
+        db.execSQL(CREATE_TABLE_SMS_TEMPLATE);
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
 
     @Override

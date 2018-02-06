@@ -8,9 +8,12 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by captain on 2018/2/2.
@@ -97,4 +100,13 @@ public class TimeConsumingChartPresenterImpl extends AbstractLineChartPresenter 
         rightAxis.setAxisMinimum(-10);
     }
 
+    @Override
+    public void updateChartData() {
+        super.updateChartData();
+        lineChart.getXAxis().setValueFormatter(((value, axis) ->
+                "1/" + new SimpleDateFormat("MM/dd", Locale.CHINA).format(
+                        (Date) (getEntries().get(0).get((int) value - 1).getData()))
+        ));
+        lineChart.invalidate();
+    }
 }
