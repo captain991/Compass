@@ -146,4 +146,17 @@ public class FormDb {
         return db.update(TABLE_NAME, contentValues, "form_id = ?", new String[]{formId + ""});
     }
 
+    public int deleteForms(List<Form> forms) {
+        String whereArgs = "";
+        for (Form form : forms) {
+            whereArgs += form.getFormId() + ",";
+        }
+        whereArgs = whereArgs.substring(0, whereArgs.lastIndexOf(","));
+
+//        return db.delete(TABLE_NAME, "form_id IN (?)", new String[]{whereArgs});
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE form_id IN (" + whereArgs + ")";
+        db.execSQL(sql);
+        return 1;
+    }
+
 }

@@ -34,7 +34,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/ic_deer" />
+            android:src="@drawable/ic_avatar" />
 
         <ImageView
             android:layout_width="15dp"
@@ -61,7 +61,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="李明" />
+            android:text="章北海" />
 
         <ImageView
             android:layout_width="15dp"

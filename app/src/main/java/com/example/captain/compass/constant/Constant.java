@@ -22,4 +22,5 @@ public class Constant {
     public static final int FORM_STATE_PACKAGE_BROKEN = 6;
     //包裹丢失
     public static final int FORM_STATE_PACKAGE_MISSED = 7;
+
 }

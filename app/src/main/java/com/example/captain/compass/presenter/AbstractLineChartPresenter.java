@@ -70,9 +70,8 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
-        xAxis.setLabelRotationAngle(-45);
+        xAxis.setLabelRotationAngle(0);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setTextColor(ColorTemplate.getHoloBlue());
@@ -106,25 +105,27 @@ public abstract class AbstractLineChartPresenter extends AbstractChartPresenter 
             List<LineDataSet> dataSets = getDataSets();
             for (LineDataSet lineDataSet : dataSets) {
                 lineDataSet.setLineWidth(3f);
-                lineDataSet.setCircleRadius(4f);
+                lineDataSet.setCircleRadius(0f);
+                lineDataSet.setDrawCircles(false);
+                lineDataSet.setDrawValues(false);
                 lineDataSet.setFillAlpha(65);
                 lineDataSet.setHighLightColor(Color.rgb(244, 117, 117));
-                lineDataSet.setCircleColorHole(Color.WHITE);
-                lineDataSet.setDrawCircleHole(true);
+//                lineDataSet.setCircleColorHole(Color.WHITE);
+//                lineDataSet.setDrawCircleHole(true);
                 data.addDataSet(lineDataSet);
             }
             // create a data object with the datasets
 
             data.setHighlightEnabled(false);
-            data.setValueTextColor(Color.BLACK);
-            data.setValueTextSize(9f);
-            data.setValueFormatter(new IntegerValueFormatter());
+//            data.setValueTextColor(Color.BLACK);
+//            data.setValueTextSize(9f);
+//            data.setValueFormatter(new IntegerValueFormatter());
 
             // set data
             lineChart.setData(data);
             lineChart.getXAxis().setValueFormatter(((value, axis) ->
                     new SimpleDateFormat("MM/dd", Locale.CHINA).format(
-                            (Date) (getEntries().get(0).get((int) value - 1).getData()))
+                            (Date) (getEntries().get(1).get((int) value - 1).getData()))
             ));
             lineChart.invalidate();
         }

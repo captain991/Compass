@@ -40,8 +40,8 @@ public class FormListWithTabActivity extends BaseActivity {
 
     private double latitude = 0;
     private double longitude = 0;
-    private List<Fragment> fragments = new ArrayList<>();
-    private FragmentPagerAdapter adapter;
+    private List<FormListFragment> fragments = new ArrayList<>();
+    private FragmentPagerAdapter<FormListFragment> adapter;
 
     public static void launchActivity(Context context) {
         Intent intent = new Intent(context, FormListWithTabActivity.class);
@@ -77,8 +77,8 @@ public class FormListWithTabActivity extends BaseActivity {
         fragments.add(FormListFragment.newInstance(latitude, longitude, Constant.FORM_STATE_RECEIVER_UNCONTACTABLE));
         fragments.add(FormListFragment.newInstance(latitude, longitude, Constant.FORM_STATE_PACKAGE_BROKEN));
         fragments.add(FormListFragment.newInstance(latitude, longitude, Constant.FORM_STATE_PACKAGE_MISSED));
-        adapter = new FragmentPagerAdapter(getSupportFragmentManager(), fragments,
-                new String[]{"派送中", "已签收", "已拒收","二次派送", "联系不到收件人", "包裹破损", "包裹丢失"});
+        adapter = new FragmentPagerAdapter<>(getSupportFragmentManager(), fragments,
+                new String[]{"配送中", "已签收", "已拒收", "二次派送", "联系不到收件人", "包裹破损", "包裹丢失"});
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 //        viewPager.setOffscreenPageLimit(fragments.size() - 1);
@@ -90,4 +90,9 @@ public class FormListWithTabActivity extends BaseActivity {
         toolbar.setTitle("快递单列表");
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!fragments.get(0).onBackPressed())
+            super.onBackPressed();
+    }
 }

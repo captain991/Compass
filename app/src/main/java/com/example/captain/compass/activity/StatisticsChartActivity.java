@@ -51,6 +51,18 @@ public class StatisticsChartActivity extends BaseActivity implements IChartView 
     @BindView(R.id.btn_date_to)
     Button btnDateTo;
 
+    @BindView(R.id.ll_work_table)
+    LinearLayout llWorkTable;
+
+    @BindView(R.id.ll_time_consuming)
+    LinearLayout llTimeComsuming;
+
+    @BindView(R.id.ll_trip_time_consuming)
+    LinearLayout llTripTimeConsuming;
+
+    @BindView(R.id.ll_difficult)
+    LinearLayout llDifficult;
+
     //    private PieChart pieChart;
 //    private LineChart lineChart;
     private AbstractChartPresenter presenter;
@@ -81,9 +93,9 @@ public class StatisticsChartActivity extends BaseActivity implements IChartView 
     }
 
     public void initView() {
-        calendar.set(2018, 1, 1);
+        calendar.set(2018, 0, 1);
         btnDateFrom.setText(simpleDateFormat.format(calendar.getTime()));
-        calendar.set(2018, 1, 7);
+        calendar.set(2018, 0, 14);
         btnDateTo.setText(simpleDateFormat.format(calendar.getTime()));
     }
 
@@ -110,12 +122,16 @@ public class StatisticsChartActivity extends BaseActivity implements IChartView 
         type = getIntent().getIntExtra(INTENT_KEY_TYPE, 0);
         if (type == TYPE_WORK_LOAD) {
             presenter = new WorkLoadChartPresenterImpl();
+            llWorkTable.setVisibility(View.VISIBLE);
         } else if (type == TYPE_TIME_CONSUMING) {
             presenter = new TimeConsumingChartPresenterImpl();
+            llTimeComsuming.setVisibility(View.VISIBLE);
         } else if (type == TYPE_TRIP_TIME_CONSUMING) {
             presenter = new TripTimeConsumingChartPresenterImpl();
+            llTripTimeConsuming.setVisibility(View.VISIBLE);
         } else if (type == TYPE_DIFFICULT) {
             presenter = new DifficultChartPresenterImpl();
+            llDifficult.setVisibility(View.VISIBLE);
         }
     }
 

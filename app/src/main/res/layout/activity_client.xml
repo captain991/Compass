@@ -25,25 +25,7 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:layout_weight="1"
-            android:text="二次派件客户" />
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/ic_arrow" />
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/ClickableItemStyle"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/mine_item_margin_top">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_weight="1"
-            android:text="拒收客户" />
+            android:text="取件时间限定客户" />
 
         <ImageView
             android:layout_width="15dp"
@@ -79,7 +61,25 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:layout_weight="1"
-            android:text="黑名单" />
+            android:text="黑名单客户" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/ClickableItemStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/mine_item_margin_top">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:text="其他客户" />
 
         <ImageView
             android:layout_width="15dp"

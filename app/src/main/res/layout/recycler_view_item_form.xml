@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -82,10 +83,19 @@
 
             <TextView
                 android:id="@+id/tv_receiver_address"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:text="北京市昌平区融泽嘉园" />
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                style="@style/CheckBoxStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="易碎物品" />
+                android:text="无" />
         </LinearLayout>
     </LinearLayout>
 
@@ -142,10 +152,5 @@
             android:text="已签收"
             android:textColor="@android:color/white" />
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="@color/lightGray" />
 
 </LinearLayout>

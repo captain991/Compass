@@ -3,12 +3,9 @@ package com.example.captain.compass.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -25,22 +22,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.amap.api.navi.AMapNavi;
-import com.amap.api.navi.AMapNaviListener;
-import com.amap.api.navi.model.AMapLaneInfo;
-import com.amap.api.navi.model.AMapNaviCameraInfo;
-import com.amap.api.navi.model.AMapNaviCross;
-import com.amap.api.navi.model.AMapNaviInfo;
-import com.amap.api.navi.model.AMapNaviLocation;
-import com.amap.api.navi.model.AMapNaviPath;
-import com.amap.api.navi.model.AMapNaviTrafficFacilityInfo;
-import com.amap.api.navi.model.AMapServiceAreaInfo;
-import com.amap.api.navi.model.AimLessModeCongestionInfo;
-import com.amap.api.navi.model.AimLessModeStat;
-import com.amap.api.navi.model.NaviInfo;
 import com.amap.api.navi.model.NaviLatLng;
-import com.amap.api.navi.view.RouteOverLay;
-import com.autonavi.tbt.TrafficFacilityInfo;
 import com.example.captain.compass.LogTag;
 import com.example.captain.compass.R;
 import com.example.captain.compass.bean.Form;
@@ -59,13 +41,12 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MapActivity extends BaseActivity implements AMapNaviListener, AMapLocationListener,
+public class MapActivity extends BaseActivity implements AMapLocationListener,
         AMap.OnMarkerClickListener {
 
     @BindView(R.id.map_view)
     MapView mapView;
 
-    private AMapNavi aNavi;
     private AMap aMap;
 
     //定位
@@ -73,13 +54,15 @@ public class MapActivity extends BaseActivity implements AMapNaviListener, AMapL
     private AMapLocationClientOption mLocationClientOption;
 
     //起点
-    private List<NaviLatLng> startPoints = new ArrayList<>();
+    private ArrayList<NaviLatLng> startPoints = new ArrayList<>();
     //终点
-    private List<NaviLatLng> endPoints = new ArrayList<>();
+    private ArrayList<NaviLatLng> endPoints = new ArrayList<>();
     //途经点
-    private List<NaviLatLng> wayPoints = new ArrayList<>();
+    private ArrayList<NaviLatLng> wayPoints = new ArrayList<>();
 
     private Map<String, Integer> formsCount = new HashMap<>();
+
+    private boolean isFirstLocate = true;
 
     //西二旗
     NaviLatLng latLngXiErQi = new NaviLatLng(40.04674, 116.30769);
@@ -114,8 +97,6 @@ public class MapActivity extends BaseActivity implements AMapNaviListener, AMapL
 
     public void initData() {
         aMap = mapView.getMap();
-        aNavi = AMapNavi.getInstance(this);
-        aNavi.addAMapNaviListener(this);
         aMap.setOnMarkerClickListener(this);
 
         //设置默认定位按钮是否显示，非必需设置。
@@ -129,8 +110,8 @@ public class MapActivity extends BaseActivity implements AMapNaviListener, AMapL
         // 禁止通过手势倾斜地图
         uiSettings.setTiltGesturesEnabled(false);
 
-        startPoints.add(latLngXiErQi);
-        endPoints.add(latLngRongZe);
+//        startPoints.add(latLngXiErQi);
+//        endPoints.add(latLngRongZe);
 
         mLocationClient = new AMapLocationClient(this);
         mLocationClient.setLocationListener(this);
@@ -199,6 +180,8 @@ public class MapActivity extends BaseActivity implements AMapNaviListener, AMapL
                             marker.setPosition(new LatLng(Double.valueOf(positions[0]), Double.valueOf(positions[1])));
                             wayPoints.add(new NaviLatLng(Double.valueOf(positions[0]), Double.valueOf(positions[1])));
                         }
+                        endPoints.add(wayPoints.get(wayPoints.size() - 1));
+                        wayPoints.remove(wayPoints.size() - 1);
                         hideLoading();
                     }
                 });
@@ -242,15 +225,21 @@ public class MapActivity extends BaseActivity implements AMapNaviListener, AMapL
         aMap.setMyLocationEnabled(true);
     }
 
-    @OnClick({R.id.btn_show_path})
-    public void showPath() {
-        int strategy = aNavi.strategyConvert(true, true, true, false, false);
-        aNavi.calculateDriveRoute(startPoints, endPoints, wayPoints, strategy);
-    }
 
-    @OnClick({R.id.btn_my_location})
-    public void showMyLocation() {
-        mLocationClient.startLocation();
+    @OnClick({R.id.btn_show_path, R.id.btn_my_location, R.id.btn_navigate})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_show_path:
+                ShowPathActivity.launchActivity(this, startPoints, wayPoints, endPoints);
+                break;
+            case R.id.btn_navigate:
+                break;
+            case R.id.btn_my_location:
+                mLocationClient.startLocation();
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -260,179 +249,16 @@ public class MapActivity extends BaseActivity implements AMapNaviListener, AMapL
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition(
                 new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()), 15, 0, 0));
         aMap.animateCamera(cameraUpdate, 1000, null);
-    }
-
-    @Override
-    public void onInitNaviFailure() {
-
-    }
-
-    @Override
-    public void onInitNaviSuccess() {
-    }
-
-    @Override
-    public void onStartNavi(int i) {
-
-    }
-
-    @Override
-    public void onCalculateRouteSuccess(int[] ints) {
-        //清空上次计算的路径列表。
-//        routeOverlays.clear();
-        HashMap<Integer, AMapNaviPath> paths = aNavi.getNaviPaths();
-        for (int i = 0; i < ints.length; i++) {
-            AMapNaviPath path = paths.get(ints[i]);
-            if (path != null) {
-                drawRoutes(ints[i], path);
-            }
+        if (isFirstLocate) {
+            startPoints.add(new NaviLatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()));
+            isFirstLocate = false;
         }
-    }
-
-
-    private void drawRoutes(int routeId, AMapNaviPath path) {
-//        calculateSuccess = true;
-        aMap.moveCamera(CameraUpdateFactory.changeTilt(0));
-        RouteOverLay routeOverLay = new RouteOverLay(aMap, path, this);
-        routeOverLay.setTrafficLine(false);
-        routeOverLay.addToMap();
-//        routeOverlays.put(routeId, routeOverLay);
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
         FormListActivity.launchActivity(this, marker.getPosition().latitude, marker.getPosition().longitude);
         return true;
-    }
-
-    @Override
-    public void onTrafficStatusUpdate() {
-
-    }
-
-    @Override
-    public void onLocationChange(AMapNaviLocation aMapNaviLocation) {
-
-    }
-
-    @Override
-    public void onGetNavigationText(int i, String s) {
-
-    }
-
-    @Override
-    public void onGetNavigationText(String s) {
-
-    }
-
-    @Override
-    public void onEndEmulatorNavi() {
-
-    }
-
-    @Override
-    public void onArriveDestination() {
-
-    }
-
-    @Override
-    public void onCalculateRouteFailure(int i) {
-
-    }
-
-    @Override
-    public void onReCalculateRouteForYaw() {
-
-    }
-
-    @Override
-    public void onReCalculateRouteForTrafficJam() {
-
-    }
-
-    @Override
-    public void onArrivedWayPoint(int i) {
-
-    }
-
-    @Override
-    public void onGpsOpenStatus(boolean b) {
-
-    }
-
-    @Override
-    public void onNaviInfoUpdate(NaviInfo naviInfo) {
-
-    }
-
-    @Override
-    public void onNaviInfoUpdated(AMapNaviInfo aMapNaviInfo) {
-
-    }
-
-    @Override
-    public void updateCameraInfo(AMapNaviCameraInfo[] aMapNaviCameraInfos) {
-
-    }
-
-    @Override
-    public void onServiceAreaUpdate(AMapServiceAreaInfo[] aMapServiceAreaInfos) {
-
-    }
-
-    @Override
-    public void showCross(AMapNaviCross aMapNaviCross) {
-
-    }
-
-    @Override
-    public void hideCross() {
-
-    }
-
-    @Override
-    public void showLaneInfo(AMapLaneInfo[] aMapLaneInfos, byte[] bytes, byte[] bytes1) {
-
-    }
-
-    @Override
-    public void hideLaneInfo() {
-
-    }
-
-    @Override
-    public void notifyParallelRoad(int i) {
-
-    }
-
-    @Override
-    public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo aMapNaviTrafficFacilityInfo) {
-
-    }
-
-    @Override
-    public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo[] aMapNaviTrafficFacilityInfos) {
-
-    }
-
-    @Override
-    public void OnUpdateTrafficFacility(TrafficFacilityInfo trafficFacilityInfo) {
-
-    }
-
-    @Override
-    public void updateAimlessModeStatistics(AimLessModeStat aimLessModeStat) {
-
-    }
-
-    @Override
-    public void updateAimlessModeCongestionInfo(AimLessModeCongestionInfo aimLessModeCongestionInfo) {
-
-    }
-
-    @Override
-    public void onPlayRing(int i) {
-
     }
 
     @Override

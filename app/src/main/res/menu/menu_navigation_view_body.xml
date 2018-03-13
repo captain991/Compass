@@ -12,12 +12,13 @@
 
     <item
         android:id="@+id/menu_item_sms_record"
-        android:icon="@drawable/ic_sms"
+        android:icon="@drawable/ic_deer"
         android:title="短信记录" />
 
-    <item android:id="@+id/menu_item_message"
+    <item
+        android:id="@+id/menu_item_message"
         android:icon="@drawable/ic_message"
-        android:title="消息"/>
+        android:title="消息" />
 
     <item
         android:id="@+id/menu_item_settings"
@@ -30,31 +31,29 @@
         android:title="意见反馈" />
 
     <!--<item-->
-        <!--android:id="@+id/menu_item_my_good"-->
-        <!--android:icon="@drawable/ic_goods"-->
-        <!--android:title="我的派件" />-->
+    <!--android:id="@+id/menu_item_my_good"-->
+    <!--android:icon="@drawable/ic_goods"-->
+    <!--android:title="我的派件" />-->
 
 
     <!--<item-->
-        <!--android:id="@+id/menu_item_my_collection"-->
-        <!--android:icon="@drawable/ic_collection"-->
-        <!--android:title="我的收藏"-->
-        <!--android:visible="false" />-->
+    <!--android:id="@+id/menu_item_my_collection"-->
+    <!--android:icon="@drawable/ic_collection"-->
+    <!--android:title="我的收藏"-->
+    <!--android:visible="false" />-->
     <item
         android:id="@+id/menu_item_qr_code"
         android:icon="@drawable/ic_qr_code"
         android:title="二维码" />
     <!--<item-->
-        <!--android:id="@+id/menu_item_search"-->
-        <!--android:icon="@drawable/ic_search"-->
-        <!--android:title="搜索" />-->
+    <!--android:id="@+id/menu_item_search"-->
+    <!--android:icon="@drawable/ic_search"-->
+    <!--android:title="搜索" />-->
 
     <!--<item-->
-        <!--android:id="@+id/nav_share"-->
-        <!--android:icon="@drawable/ic_share"-->
-        <!--android:title="分享" />-->
-
-
+    <!--android:id="@+id/nav_share"-->
+    <!--android:icon="@drawable/ic_share"-->
+    <!--android:title="分享" />-->
 
 
 </menu>

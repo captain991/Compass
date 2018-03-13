@@ -1,6 +1,7 @@
 package com.example.captain.compass.bean;
 
 import com.example.captain.compass.constant.Constant;
+import com.google.gson.annotations.Expose;
 
 import java.io.Serializable;
 
@@ -11,12 +12,17 @@ import java.io.Serializable;
 public class Form implements Serializable {
     //    private String senderName;
 //    private String senderAddress;
+    @Expose
     private String senderTel;
 
+    @Expose
     private String receiverName;
+    @Expose
     private String receiverAddress;
+    @Expose
     private String receiverTel;
 
+    @Expose
     private String formId;
     //物品名称
 //    private String objectName;
@@ -24,16 +30,23 @@ public class Form implements Serializable {
 //    private int weight;
 
     //订单状态
+    @Expose
     private int state = Constant.FORM_STATE_DELIVERYING;
 
     //备注
+    @Expose
     private String mark;
 
     //收件人地址经度
+    @Expose
     private double receiverLatitude;
 
     //收件人地址纬度
+    @Expose
     private double receiverLongitude;
+
+    @Expose(serialize = false, deserialize = false)
+    private boolean checked = false;
 
     public Form() {
     }
@@ -152,5 +165,13 @@ public class Form implements Serializable {
 
     public void setReceiverLongitude(double receiverLongitude) {
         this.receiverLongitude = receiverLongitude;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

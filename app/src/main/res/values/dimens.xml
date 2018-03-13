@@ -7,4 +7,5 @@
 
     <dimen name="work_item_icon_size">40dp</dimen>
     <dimen name="work_item_height">110dp</dimen>
+    <dimen name="bottom_operate_btn_size">35dp</dimen>
 </resources>

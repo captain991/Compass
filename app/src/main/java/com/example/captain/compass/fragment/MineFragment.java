@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.captain.compass.R;
 import com.example.captain.compass.activity.FormManageActivity;
 import com.example.captain.compass.activity.MyInfoActivity;
+import com.example.captain.compass.activity.QRCodeActivity;
 import com.example.captain.compass.activity.SmsTemplateListActivity;
 
 import butterknife.ButterKnife;
@@ -51,17 +52,20 @@ public class MineFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.layout_my_info, R.id.layout_sms_template, R.id.layout_feedback})
+    @OnClick({R.id.layout_my_info, R.id.layout_sms_template, R.id.layout_feedback, R.id.layout_about_us})
     public void itemClick(View view) {
         switch (view.getId()) {
             case R.id.layout_feedback:
-                FormManageActivity.launchActivity(getActivity());
+//                FormManageActivity.launchActivity(getActivity());
                 break;
             case R.id.layout_sms_template:
                 SmsTemplateListActivity.launchActivity(getActivity());
                 break;
             case R.id.layout_my_info:
                 MyInfoActivity.launchActivity(getActivity());
+                break;
+            case R.id.layout_about_us:
+//                QRCodeActivity.launchActivity(getActivity());
                 break;
             default:
                 break;

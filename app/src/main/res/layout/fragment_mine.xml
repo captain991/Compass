@@ -18,7 +18,7 @@
             android:id="@+id/iv_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_deer" />
+            android:src="@drawable/ic_avatar" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -27,7 +27,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="李明"
+            android:text="章北海"
             android:textColor="@android:color/white" />
 
         <ImageView
@@ -137,6 +137,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_about_us"
         style="@style/ClickableItemStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="1dp">

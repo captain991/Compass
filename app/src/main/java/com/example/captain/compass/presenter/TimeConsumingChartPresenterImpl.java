@@ -57,35 +57,63 @@ public class TimeConsumingChartPresenterImpl extends AbstractLineChartPresenter 
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2018, 1, 1);
-        yVals1.add(new Entry(1, 2.7f, calendar.getTime()));
+        yVals1.add(new Entry(1, 4.5f, calendar.getTime()));
         calendar.set(2018, 1, 2);
-        yVals1.add(new Entry(2, 5.2f, calendar.getTime()));
+        yVals1.add(new Entry(2, 10f, calendar.getTime()));
         calendar.set(2018, 1, 3);
-        yVals1.add(new Entry(3, 7, calendar.getTime()));
+        yVals1.add(new Entry(3, 14.5f, calendar.getTime()));
         calendar.set(2018, 1, 4);
-        yVals1.add(new Entry(4, 3.5f, calendar.getTime()));
+        yVals1.add(new Entry(4, 16.2f, calendar.getTime()));
         calendar.set(2018, 1, 5);
-        yVals1.add(new Entry(5, 6, calendar.getTime()));
+        yVals1.add(new Entry(5, 14.2f, calendar.getTime()));
         calendar.set(2018, 1, 6);
-        yVals1.add(new Entry(6, 2.8f, calendar.getTime()));
+        yVals1.add(new Entry(6, 14.2f, calendar.getTime()));
         calendar.set(2018, 1, 7);
-        yVals1.add(new Entry(7, 5.1f, calendar.getTime()));
+        yVals1.add(new Entry(7, 13.6f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(8, 12f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(9, 12.5f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(10, 11.1f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(11, 10.75f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(12, 11.3f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(13, 9.3f, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals1.add(new Entry(14, 7.3f, calendar.getTime()));
 
         ArrayList<Entry> yVals2 = new ArrayList<>();
         calendar.set(2018, 1, 1);
-        yVals2.add(new Entry(1, -9, calendar.getTime()));
+        yVals2.add(new Entry(1, 8, calendar.getTime()));
         calendar.set(2018, 1, 2);
-        yVals2.add(new Entry(2, -2, calendar.getTime()));
+        yVals2.add(new Entry(2, 5, calendar.getTime()));
         calendar.set(2018, 1, 3);
-        yVals2.add(new Entry(3, -1, calendar.getTime()));
+        yVals2.add(new Entry(3, 2, calendar.getTime()));
         calendar.set(2018, 1, 4);
-        yVals2.add(new Entry(4, -7, calendar.getTime()));
+        yVals2.add(new Entry(4, 0, calendar.getTime()));
         calendar.set(2018, 1, 5);
-        yVals2.add(new Entry(5, -2, calendar.getTime()));
+        yVals2.add(new Entry(5, -1, calendar.getTime()));
         calendar.set(2018, 1, 6);
-        yVals2.add(new Entry(6, -7, calendar.getTime()));
+        yVals2.add(new Entry(6, -1, calendar.getTime()));
         calendar.set(2018, 1, 7);
-        yVals2.add(new Entry(7, -2, calendar.getTime()));
+        yVals2.add(new Entry(7, -1, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(8, -2, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(9, 0, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(10, 1, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(11, 2, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(12, 3, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(13, 5, calendar.getTime()));
+        calendar.set(2018, 1, 7);
+        yVals2.add(new Entry(14, 7, calendar.getTime()));
         entries.add(yVals1);
         entries.add(yVals2);
         return entries;
@@ -93,10 +121,10 @@ public class TimeConsumingChartPresenterImpl extends AbstractLineChartPresenter 
 
     @Override
     public void updateYAxis(YAxis leftAxis, YAxis rightAxis) {
-        leftAxis.setAxisMaximum(10f);
+        leftAxis.setAxisMaximum(20f);
         leftAxis.setAxisMinimum(0f);
 
-        rightAxis.setAxisMaximum(0);
+        rightAxis.setAxisMaximum(10);
         rightAxis.setAxisMinimum(-10);
     }
 
@@ -104,7 +132,7 @@ public class TimeConsumingChartPresenterImpl extends AbstractLineChartPresenter 
     public void updateChartData() {
         super.updateChartData();
         lineChart.getXAxis().setValueFormatter(((value, axis) ->
-                "1/" + new SimpleDateFormat("MM/dd", Locale.CHINA).format(
+                new SimpleDateFormat("MM/dd", Locale.CHINA).format(
                         (Date) (getEntries().get(0).get((int) value - 1).getData()))
         ));
         lineChart.invalidate();

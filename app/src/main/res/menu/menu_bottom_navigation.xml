@@ -5,7 +5,7 @@
         android:layout_height="wrap_content"
         android:icon="@drawable/ic_delivery"
         android:orderInCategory="0"
-        android:title="首页" />
+        android:title="工作" />
 
     <item
         android:layout_width="wrap_content"

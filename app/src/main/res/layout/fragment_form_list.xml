@@ -9,4 +9,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:id="@+id/layout_operate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:id="@+id/layout_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="@dimen/bottom_operate_btn_size"
+                android:layout_height="@dimen/bottom_operate_btn_size"
+                android:background="@drawable/btn_bg_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="删除"
+                android:textColor="@color/darkGray"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_send_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_send_sms"
+                android:layout_width="@dimen/bottom_operate_btn_size"
+                android:layout_height="@dimen/bottom_operate_btn_size"
+                android:background="@drawable/btn_bg_send_sms" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="发送短信"
+                android:textColor="@color/darkGray"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_mark_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_mark_client"
+                android:layout_width="@dimen/bottom_operate_btn_size"
+                android:layout_height="@dimen/bottom_operate_btn_size"
+                android:background="@drawable/btn_bg_mark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="标记客户"
+                android:textColor="@color/darkGray"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </FrameLayout>

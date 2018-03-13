@@ -38,4 +38,8 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="CheckBoxStyle">
+        <item name="android:button">@drawable/bg_checkbox</item>
+    </style>
+
 </resources>

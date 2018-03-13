@@ -16,7 +16,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="right|bottom"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
         android:src="@drawable/ic_aim"
         app:backgroundTint="@android:color/white"
@@ -45,6 +45,7 @@
         android:src="@drawable/ic_navigate"
         app:backgroundTint="@android:color/white"
         app:borderWidth="0dp"
-        app:fabSize="mini" />
+        app:fabSize="mini"
+        android:visibility="gone"/>
 
 </FrameLayout>

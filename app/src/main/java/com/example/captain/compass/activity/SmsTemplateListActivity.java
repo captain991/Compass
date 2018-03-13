@@ -8,17 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.example.captain.compass.R;
+import com.example.captain.compass.SampleItemDecoration;
 import com.example.captain.compass.adapter.SmsTemplateListAdapter;
 import com.example.captain.compass.bean.SmsTemplate;
 import com.example.captain.compass.database.SmsTemplateDb;
 import com.example.captain.compass.event.UpdateSmsTemplateEvent;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogBuilder;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -71,6 +68,7 @@ public class SmsTemplateListActivity extends BaseActivity {
         adapter = new SmsTemplateListAdapter(smsTemplates);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new SampleItemDecoration());
         emptyView.show(true);
         getSmsTemplates();
     }

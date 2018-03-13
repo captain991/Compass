@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.captain.compass.R;
 import com.example.captain.compass.bean.Form;
 import com.example.captain.compass.constant.Constant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,8 +26,12 @@ import butterknife.ButterKnife;
 
 public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.FormsViewHolder> {
     private List<Form> forms = null;
+    private List<Form> checkedForms = new ArrayList<>();
     private OnStateChangeListener onStateChangeListener = null;
+    private OnOperateClickableChangeListener onOperateClickableChangeListener = null;
+    private OnEditModeChangeListener onEditModeChangeListener = null;
     private Context context;
+    private boolean isEditMode = false;
 
     public FormListAdapter(Context context, List<Form> forms) {
         this.forms = forms;
@@ -66,6 +72,8 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.FormsV
         holder.btnReceived.setEnabled(form.getState() == Constant.FORM_STATE_DELIVERYING);
         holder.btnReceived.setOnClickListener(
                 v -> onStateChangeListener.onStateChanged(form, Constant.FORM_STATE_RECEIVED, position));
+        holder.checkBox.setVisibility(isEditMode ? View.VISIBLE : View.GONE);
+        holder.checkBox.setChecked(form.isChecked());
         holder.btnUnreceived.setOnClickListener(v -> {
             String[] items = new String[]{"无理由拒收", "联系不到收件人", "二次派送", "包裹破损", "包裹丢失"};
             new AlertDialog.Builder(context)
@@ -83,6 +91,27 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.FormsV
                             state = Constant.FORM_STATE_PACKAGE_MISSED;
                         onStateChangeListener.onStateChanged(form, state, position);
                     }).create().show();
+
+        });
+        holder.itemView.setOnLongClickListener(view -> {
+            if (!isEditMode) {
+                checkedForms.add(form);
+                form.setChecked(true);
+                setEditMode(true);
+                onOperateClickableChangeListener.onOperateClickableChange(true);
+                notifyDataSetChanged();
+                return true;
+            }
+            return false;
+        });
+        holder.itemView.setOnClickListener(view -> {
+            form.setChecked(!form.isChecked());
+            if (checkedForms.contains(form)) {
+                checkedForms.remove(form);
+            } else
+                checkedForms.add(form);
+            onOperateClickableChangeListener.onOperateClickableChange(checkedForms.size() > 0);
+            notifyItemChanged(position);
         });
     }
 
@@ -113,17 +142,77 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.FormsV
         @BindView(R.id.btn_unreceived)
         Button btnUnreceived;
 
+        @BindView(R.id.checkbox)
+        CheckBox checkBox;
+
         public FormsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
 
-    public void setOnStateChangeListener(OnStateChangeListener onStateChangeListener) {
-        this.onStateChangeListener = onStateChangeListener;
+    public boolean isEditMode() {
+        return isEditMode;
     }
 
+    public void setEditMode(boolean editMode) {
+        if (editMode == this.isEditMode)
+            return;
+        isEditMode = editMode;
+        onEditModeChangeListener.onEditModeChange(isEditMode);
+        //一单退出编辑模式，所有已选中的全部清空
+        if (!isEditMode) {
+            for (Form f : checkedForms)
+                f.setChecked(false);
+            checkedForms.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setOperateClickable(boolean clickable) {
+        onOperateClickableChangeListener.onOperateClickableChange(clickable);
+    }
+
+    //订单状态变化监听
     public interface OnStateChangeListener {
         void onStateChanged(Form form, int state, int position);
     }
+
+    public OnStateChangeListener getOnStateChangeListener() {
+        return onStateChangeListener;
+    }
+
+    public void setOnStateChangeListener(OnStateChangeListener stateChangeListener) {
+        this.onStateChangeListener = stateChangeListener;
+    }
+
+
+    public interface OnOperateClickableChangeListener {
+        void onOperateClickableChange(boolean isClickable);
+    }
+
+    public void setOnOperateClickableChangeListener(OnOperateClickableChangeListener onOperateClickableChangeListener) {
+        this.onOperateClickableChangeListener = onOperateClickableChangeListener;
+    }
+
+    public OnOperateClickableChangeListener getOnOperateClickableChangeListener() {
+        return onOperateClickableChangeListener;
+    }
+
+    public interface OnEditModeChangeListener {
+        void onEditModeChange(boolean isEditMode);
+    }
+
+    public void setOnEditModeChangeListener(OnEditModeChangeListener onEditModeChangeListener) {
+        this.onEditModeChangeListener = onEditModeChangeListener;
+    }
+
+    public OnEditModeChangeListener getOnEditModeChangeListener() {
+        return onEditModeChangeListener;
+    }
+
+    public List<Form> getCheckedForms() {
+        return checkedForms;
+    }
+
 }

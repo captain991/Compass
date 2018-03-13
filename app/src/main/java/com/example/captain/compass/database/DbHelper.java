@@ -13,11 +13,11 @@ import com.example.captain.compass.Application;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = Environment.getExternalStorageDirectory() + "/compass.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private SQLiteDatabase db;
     private static DbHelper instance = null;
 
-    String CREATE_TABLE_FORM = "CREATE TABLE form (" +
+    String CREATE_TABLE_FORM = "CREATE TABLE IF NOT EXISTS form (" +
             " form_id TEXT PRIMARY KEY," +
             " sender_tel TEXT," +
             " receiver_name TEXT," +
@@ -29,9 +29,9 @@ public class DbHelper extends SQLiteOpenHelper {
             " state INTEGER" +
             ")";
 
-    String CREATE_TABLE_SMS_TEMPLATE = "CREATE TABLE sms_template (" +
-            "user_id INTEGER," +
+    String CREATE_TABLE_SMS_TEMPLATE = "CREATE TABLE IF NOT EXISTS sms_template (" +
             "template_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "user_id INTEGER," +
             "title TEXT," +
             "content TEXT," +
             "update_time INTEGER" +
@@ -63,6 +63,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        switch (oldVersion) {
+            case 1:
+                db.execSQL(CREATE_TABLE_SMS_TEMPLATE);
+            default:
+                break;
+        }
     }
 }

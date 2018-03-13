@@ -9,15 +9,15 @@ import java.util.List;
  * Created by captain on 2018/1/29.
  */
 
-public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
-    private List<Fragment> fragments;
+public class FragmentPagerAdapter<T extends Fragment> extends android.support.v4.app.FragmentPagerAdapter {
+    private List<T> fragments;
     private String[] titles;
 
-    public FragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public FragmentPagerAdapter(FragmentManager fm, List<T> fragments) {
         this(fm, fragments, null);
     }
 
-    public FragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] titles) {
+    public FragmentPagerAdapter(FragmentManager fm, List<T> fragments, String[] titles) {
         super(fm);
         this.fragments = fragments;
         this.titles = titles;
@@ -30,7 +30,7 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAd
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public T getItem(int position) {
         return fragments.get(position);
     }
 

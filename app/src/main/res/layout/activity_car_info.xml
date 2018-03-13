@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500kg" />
+                    android:text="250kg" />
 
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="200kg" />
+                    android:text="500kg" />
 
             </LinearLayout>
 

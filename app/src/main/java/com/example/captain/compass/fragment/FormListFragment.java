@@ -4,33 +4,41 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
+import com.example.captain.compass.SampleItemDecoration;
 import com.example.captain.compass.ThreadPoolManager;
+import com.example.captain.compass.activity.BaseActivity;
 import com.example.captain.compass.adapter.FormListAdapter;
 import com.example.captain.compass.LogTag;
 import com.example.captain.compass.R;
 import com.example.captain.compass.bean.Form;
 import com.example.captain.compass.database.FormDb;
 import com.example.captain.compass.event.AddFormEvent;
+import com.example.captain.compass.event.UpdateFormCountEvent;
+import com.qmuiteam.qmui.util.QMUIDirection;
+import com.qmuiteam.qmui.util.QMUIViewHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Observable;
+import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -46,13 +54,26 @@ public class FormListFragment extends Fragment implements FormListAdapter.OnStat
     private int state;
     private int s;
 
-    private List<Form> forms = new ArrayList<>();
+    private final List<Form> forms = new ArrayList<>();
     private FormListAdapter adapter;
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    @BindView(R.id.layout_operate)
+    LinearLayout llOperate;
+
+    @BindView(R.id.btn_delete)
+    Button btnDelete;
+
+    @BindView(R.id.btn_send_sms)
+    Button btnSendSms;
+
+    @BindView(R.id.btn_mark_client)
+    Button btnMarkClient;
+
     private View rootView = null;
+    private BaseActivity activity = null;
 
     public FormListFragment() {
         // Required empty public constructor
@@ -90,8 +111,22 @@ public class FormListFragment extends Fragment implements FormListAdapter.OnStat
             state = getArguments().getInt(PARAM_STATE);
         }
 
+        activity = (BaseActivity) getActivity();
+
         adapter = new FormListAdapter(getActivity(), forms);
         adapter.setOnStateChangeListener(this);
+        adapter.setOnEditModeChangeListener(isEditMode -> {
+            if (isEditMode) {
+                QMUIViewHelper.slideIn(llOperate, 500, null, true, QMUIDirection.BOTTOM_TO_TOP);
+            } else {
+                QMUIViewHelper.slideOut(llOperate, 500, null, true, QMUIDirection.TOP_TO_BOTTOM);
+            }
+        });
+        adapter.setOnOperateClickableChangeListener(isClickable -> {
+            btnSendSms.setEnabled(isClickable);
+            btnDelete.setEnabled(isClickable);
+            btnMarkClient.setEnabled(isClickable);
+        });
         EventBus.getDefault().register(this);
         getForms();
         Log.d(LogTag.FRAGMENT, "fragment " + s + " onCreate()");
@@ -106,6 +141,7 @@ public class FormListFragment extends Fragment implements FormListAdapter.OnStat
             ButterKnife.bind(this, rootView);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.addItemDecoration(new SampleItemDecoration());
         }
         Log.d(LogTag.FRAGMENT, "fragment " + s + " onCreateView()");
         adapter.notifyDataSetChanged();
@@ -206,6 +242,7 @@ public class FormListFragment extends Fragment implements FormListAdapter.OnStat
         adapter.notifyItemRemoved(position);
 //        BroadcastUtil.addForm(getActivity(), form);
         EventBus.getDefault().post(new AddFormEvent(form));
+        EventBus.getDefault().post(new UpdateFormCountEvent());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -218,6 +255,66 @@ public class FormListFragment extends Fragment implements FormListAdapter.OnStat
         adapter.notifyItemInserted(0);
         ThreadPoolManager.fixedThreadPoolExecute(
                 () -> FormDb.getInstance().updateFormState(form.getFormId(), form.getState()));
+    }
+
+    @OnClick({R.id.btn_delete, R.id.btn_send_sms, R.id.btn_mark_client})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_delete:
+                activity.showLoading("删除中...");
+                Observable.create(new Observable.OnSubscribe<Integer>() {
+                    @Override
+                    public void call(Subscriber<? super Integer> subscriber) {
+                        subscriber.onNext(FormDb.getInstance().deleteForms(adapter.getCheckedForms()));
+                        subscriber.onCompleted();
+                    }
+                })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Integer>() {
+                            @Override
+                            public void onCompleted() {
+                                activity.hideLoading();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                activity.showToast("出现异常");
+                            }
+
+                            @Override
+                            public void onNext(Integer i) {
+                                if (i > 0) {
+                                    activity.showToast("删除成功");
+                                    forms.removeAll(adapter.getCheckedForms());
+                                    adapter.setEditMode(false);
+                                    EventBus.getDefault().post(new UpdateFormCountEvent());
+
+                                }
+                            }
+                        });
+                break;
+            case R.id.btn_send_sms:
+                ((BaseActivity) getActivity()).showToast("短信已发送");
+                break;
+            case R.id.btn_mark_client:
+                String[] items2 = new String[]{"取件时间限定客户", "VIP客户", "黑名单客户", "其他客户",};
+                new AlertDialog.Builder(getActivity())
+                        .setItems(items2, (dialog, which) -> ((BaseActivity) getActivity()).showToast(items2[which]))
+                        .create().show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public boolean onBackPressed() {
+        if (adapter.isEditMode()) {
+            adapter.setEditMode(false);
+            adapter.setOperateClickable(true);
+            return true;
+        }
+        return false;
     }
 
     @Override

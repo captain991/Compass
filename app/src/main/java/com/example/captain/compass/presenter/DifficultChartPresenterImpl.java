@@ -60,13 +60,13 @@ public class DifficultChartPresenterImpl extends AbstractChartPresenter {
         pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
         Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
-        l.setYOffset(0f);
+        l.setYOffset(10f);
 
         // entry label styling
         pieChart.setEntryLabelColor(Color.BLACK);
@@ -86,9 +86,9 @@ public class DifficultChartPresenterImpl extends AbstractChartPresenter {
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         String[] entryLabels = new String[]{"二次派件", "包裹破损", "包裹丢失", "无原因拒收", "联系不到收件人"};
-        int[] values = new int[]{3, 5, 8, 10, 5};
+        int[] values = new int[]{20, 2, 1, 1, 3};
         for (int i = 0; i < entryLabels.length; i++) {
-            entries.add(new PieEntry(values[i], (entryLabels[i]) + "(" + values[i] + ")"));
+            entries.add(new PieEntry(values[i], (entryLabels[i])));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -96,7 +96,7 @@ public class DifficultChartPresenterImpl extends AbstractChartPresenter {
         dataSet.setDrawIcons(false);
 
         dataSet.setSliceSpace(3f);
-        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setIconsOffset(new MPPointF(10, 0));
         dataSet.setSelectionShift(5f);
 
         // add a lot of colors
