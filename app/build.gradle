@@ -31,6 +31,7 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
+        buildConfigField("int", "BUILD_VERSION", buildVersion+"")
     }
 
     sourceSets {
@@ -45,6 +46,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
         debug {
             signingConfig signingConfigs.config

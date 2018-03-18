@@ -25,11 +25,13 @@
             android:padding="10dp">
 
             <ImageView
+                android:id="@+id/iv_query_form"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_search" />
 
             <EditText
+                android:id="@+id/et_form_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -39,6 +41,18 @@
                 android:inputType="number"
                 android:padding="1dp"
                 android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/lightGray" />
+
+            <ImageView
+                android:id="@+id/iv_scan_query_form"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_scan" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 

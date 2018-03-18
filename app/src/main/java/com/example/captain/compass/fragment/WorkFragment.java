@@ -1,17 +1,19 @@
 package com.example.captain.compass.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.captain.compass.LogTag;
-import com.example.captain.compass.LogUtil;
+import com.example.captain.compass.activity.FormListActivity;
+import com.example.captain.compass.util.LogTag;
 import com.example.captain.compass.R;
 import com.example.captain.compass.activity.BaseActivity;
 import com.example.captain.compass.activity.CarInfoActivity;
@@ -47,6 +49,7 @@ public class WorkFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private static final int REQUEST_CODE_SCAN_DELIVERY = 1;
+    private static final int REQUEST_CODE_SCAN_QUERY_FORM = 2;
 
     private String mParam1;
     private String mParam2;
@@ -56,6 +59,9 @@ public class WorkFragment extends Fragment {
 
     @BindView(R.id.tv_received_count)
     TextView tvReceivedCount;
+
+    @BindView(R.id.et_form_id)
+    EditText etFormId;
 
     public WorkFragment() {
         // Required empty public constructor
@@ -124,24 +130,37 @@ public class WorkFragment extends Fragment {
     }
 
     @OnClick({R.id.layout_scan_delivery, R.id.layout_navigation, R.id.layout_client, R.id.layout_car_info,
-            R.id.layout_package_state,})
+            R.id.layout_package_state, R.id.iv_query_form, R.id.iv_scan_query_form})
     public void click(View view) {
+        BaseActivity activity = (BaseActivity) getActivity();
         switch (view.getId()) {
             case R.id.layout_scan_delivery:
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                Intent intent = new Intent(activity, CaptureActivity.class);
                 getActivity().startActivityForResult(intent, REQUEST_CODE_SCAN_DELIVERY);
                 break;
             case R.id.layout_navigation:
-                MapActivity.launchActivity(getActivity());
+                MapActivity.launchActivity(activity);
                 break;
             case R.id.layout_client:
-                ClientActivity.launchActivity(getActivity());
+                ClientActivity.launchActivity(activity);
                 break;
             case R.id.layout_car_info:
-                CarInfoActivity.launchActivity(getActivity());
+                CarInfoActivity.launchActivity(activity);
                 break;
             case R.id.layout_package_state:
-                FormListWithTabActivity.launchActivity(getActivity());
+                FormListWithTabActivity.launchActivity(activity);
+                break;
+            case R.id.iv_query_form:
+                String formId = etFormId.getText().toString();
+                if (TextUtils.isEmpty(formId)) {
+                    activity.showToast("订单号不能为空！");
+                    return;
+                }
+                FormListActivity.launchActivity(activity, formId);
+                break;
+            case R.id.iv_scan_query_form:
+                activity.startActivityForResult(new Intent(activity, CaptureActivity.class),
+                        REQUEST_CODE_SCAN_QUERY_FORM);
                 break;
 
             default:
@@ -153,7 +172,8 @@ public class WorkFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_SCAN_DELIVERY && data != null) {
+        if ((requestCode == REQUEST_CODE_SCAN_DELIVERY || requestCode == REQUEST_CODE_SCAN_QUERY_FORM) &&
+                data != null) {
             //处理扫描结果（在界面上显示）
             BaseActivity activity = (BaseActivity) getActivity();
             Bundle bundle = data.getExtras();
@@ -166,38 +186,50 @@ public class WorkFragment extends Fragment {
                 GsonBuilder gsonBuilder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
                 Gson gson = gsonBuilder.create();
                 Form form = gson.fromJson(result, Form.class);
-                Observable.create(new Observable.OnSubscribe<Long>() {
-                    @Override
-                    public void call(Subscriber<? super Long> subscriber) {
-
-                        subscriber.onNext(FormDb.getInstance().insertForm(form));
-                        subscriber.onCompleted();
-                    }
-                })
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Long>() {
-                            @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.e(LogTag.CAPTAIN, "scan qrcode insert form error:" + e.toString());
-                            }
-
-                            @Override
-                            public void onNext(Long aLong) {
-                                activity.showToast("添加快递单成功！");
-                                EventBus.getDefault().post(new UpdateFormCountEvent());
-                            }
-                        });
+                if (requestCode == REQUEST_CODE_SCAN_DELIVERY) {
+                    handleScanDelivery(activity, form);
+                } else if (requestCode == REQUEST_CODE_SCAN_QUERY_FORM) {
+                    handleQueryForm(activity, form.getFormId());
+                }
             } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                 activity.showToast("解析二维码失败");
             }
 
         }
+    }
+
+    public void handleScanDelivery(BaseActivity activity, Form form) {
+        Observable.create(new Observable.OnSubscribe<Long>() {
+            @Override
+            public void call(Subscriber<? super Long> subscriber) {
+
+                subscriber.onNext(FormDb.getInstance().insertForm(form));
+                subscriber.onCompleted();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Long>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(LogTag.CAPTAIN, "scan qrcode insert form error:" + e.toString());
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        activity.showToast("添加快递单成功！");
+                        EventBus.getDefault().post(new UpdateFormCountEvent());
+                    }
+                });
+    }
+
+    public void handleQueryForm(BaseActivity activity, String formId) {
+        FormListActivity.launchActivity(activity, formId);
     }
 
     @Override

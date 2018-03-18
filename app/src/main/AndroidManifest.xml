@@ -27,9 +27,7 @@
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
@@ -42,16 +40,13 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="370bcef737a72e259380c2f340e42c59" />
+        <provider
+            android:authorities="com.example.captain.compass"
+            android:name=".database.ContentProvider" />
 
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.QRCodeActivity" />
         <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.MapActivity" />
@@ -68,6 +63,17 @@
         <activity android:name=".activity.SmsTemplateActivity" />
         <activity android:name=".activity.NavigateActivity" />
         <activity android:name=".activity.ShowPathActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/TransparentStatus"/>
+        <activity android:name=".activity.AppStartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.captain.compass.R;
 
@@ -30,6 +31,7 @@ public class CarInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_car_info);
         ButterKnife.bind(this);
         initToolbar();
+        setDisplayHomeAsUpEnabled();
     }
 
     public void initToolbar() {
@@ -37,5 +39,13 @@ public class CarInfoActivity extends BaseActivity {
         collapsingToolbarLayout.setTitle("车辆信息");
         collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#ffffff"));
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#ffffff"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

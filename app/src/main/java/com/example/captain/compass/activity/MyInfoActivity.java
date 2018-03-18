@@ -7,11 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.captain.compass.Application;
 import com.example.captain.compass.R;
 import com.example.captain.compass.constant.Constant;
+import com.example.captain.compass.util.SPHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
@@ -33,6 +36,7 @@ public class MyInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_my_info);
         ButterKnife.bind(this);
         initToolbar();
+        setDisplayHomeAsUpEnabled();
     }
 
 
@@ -41,17 +45,17 @@ public class MyInfoActivity extends BaseActivity {
     }
 
     @OnClick({R.id.layout_avatar, R.id.layout_name, R.id.layout_tel, R.id.layout_id_number,
-            R.id.layout_company, R.id.layout_branch})
+            R.id.layout_company, R.id.layout_branch, R.id.tv_log_off})
     public void itemClick(View view) {
         switch (view.getId()) {
             case R.id.layout_name:
-                showInputDialog("", "请输入姓名", InputType.TYPE_CLASS_TEXT,"李明");
+                showInputDialog("", "请输入姓名", InputType.TYPE_CLASS_TEXT, "李明");
                 break;
             case R.id.layout_tel:
-                showInputDialog("", "请输入手机号", InputType.TYPE_CLASS_PHONE,"15913145200");
+                showInputDialog("", "请输入手机号", InputType.TYPE_CLASS_PHONE, "15913145200");
                 break;
             case R.id.layout_id_number:
-                showInputDialog("", "请输入身份证号", InputType.TYPE_CLASS_TEXT,"123456201810017890");
+                showInputDialog("", "请输入身份证号", InputType.TYPE_CLASS_TEXT, "123456201810017890");
                 break;
             case R.id.layout_company:
                 String[] items = new String[]{"顺丰快递", "申通快递", "韵达快递", "圆通快递", "宅急送"};
@@ -65,6 +69,11 @@ public class MyInfoActivity extends BaseActivity {
                 new AlertDialog.Builder(this)
                         .setItems(items2, (dialog, which) -> showToast(items2[which]))
                         .create().show();
+                break;
+            case R.id.tv_log_off:
+                Application.getApplication().finishAllActivity();
+                LoginActivity.launchActivity(this);
+                SPHelper.setIsLogin(this, false);
                 break;
             default:
                 break;
@@ -86,5 +95,13 @@ public class MyInfoActivity extends BaseActivity {
                     }
                 }).show();
         builder.getEditText().setText(hint);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

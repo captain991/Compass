@@ -5,6 +5,8 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.captain.compass.util.DensityUtil;
+
 /**
  * Created by captain on 2018/2/7.
  */

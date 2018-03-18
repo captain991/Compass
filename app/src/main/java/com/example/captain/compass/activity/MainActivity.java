@@ -1,5 +1,6 @@
 package com.example.captain.compass.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -35,6 +36,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     private FragmentPagerAdapter fragmentPagerAdapter;
     private List<Fragment> fragments = new ArrayList<>();
+
+    public static void launchActivity(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

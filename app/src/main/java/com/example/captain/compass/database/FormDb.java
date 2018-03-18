@@ -101,7 +101,7 @@ public class FormDb {
         List<Form> forms = new ArrayList<>();
         Form form = null;
         Cursor cursor = db.query(TABLE_NAME, null, null, null,
-                null, null, null);
+                null, null, "form_id ASC");
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 form = cursor2Form(cursor);

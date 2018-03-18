@@ -138,7 +138,7 @@
             android:layout_height="30dp"
             android:layout_gravity="right"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_bg_round_corner"
+            android:background="@drawable/btn_bg_round_corner_solid"
             android:text="未签收"
             android:textColor="@android:color/white" />
 
@@ -148,7 +148,7 @@
             android:layout_height="30dp"
             android:layout_gravity="right"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_bg_round_corner"
+            android:background="@drawable/btn_bg_round_corner_solid"
             android:text="已签收"
             android:textColor="@android:color/white" />
     </LinearLayout>

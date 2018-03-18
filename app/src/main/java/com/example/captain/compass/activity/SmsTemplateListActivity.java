@@ -55,6 +55,7 @@ public class SmsTemplateListActivity extends BaseActivity {
         setContentView(R.layout.activity_sms_template_list);
         ButterKnife.bind(this);
         initToolbar();
+        setDisplayHomeAsUpEnabled();
         initData();
         initListener();
         EventBus.getDefault().register(this);
@@ -143,6 +144,8 @@ public class SmsTemplateListActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add_template) {
             SmsTemplateActivity.launchActivity(this, null);
+        }else if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return true;
     }

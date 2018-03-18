@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.captain.compass.LogTag;
+import com.example.captain.compass.util.LogTag;
 import com.example.captain.compass.database.FormDb;
 import com.example.captain.compass.R;
 import com.example.captain.compass.bean.Form;

@@ -23,7 +23,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.navi.model.NaviLatLng;
-import com.example.captain.compass.LogTag;
+import com.example.captain.compass.util.LogTag;
 import com.example.captain.compass.R;
 import com.example.captain.compass.bean.Form;
 import com.example.captain.compass.database.FormDb;
@@ -160,8 +160,10 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,
                             String key = f.getReceiverLatitude() + "_" + f.getReceiverLongitude();
                             if (formsCount.containsKey(key))
                                 formsCount.put(key, formsCount.get(key) + 1);
-                            else
+                            else {
                                 formsCount.put(key, 1);
+                                wayPoints.add(new NaviLatLng(f.getReceiverLatitude(), f.getReceiverLongitude()));
+                            }
                         }
 
                         for (String key : formsCount.keySet()) {
@@ -177,8 +179,8 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,
                             } else
                                 options = options4;
                             Marker marker = aMap.addMarker(options);
-                            marker.setPosition(new LatLng(Double.valueOf(positions[0]), Double.valueOf(positions[1])));
-                            wayPoints.add(new NaviLatLng(Double.valueOf(positions[0]), Double.valueOf(positions[1])));
+                            marker.setPosition(new LatLng(Double.valueOf(positions[0]),
+                                    Double.valueOf(positions[1])));
                         }
                         endPoints.add(wayPoints.get(wayPoints.size() - 1));
                         wayPoints.remove(wayPoints.size() - 1);
