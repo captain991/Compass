@@ -1,6 +1,8 @@
 package com.example.captain.compass;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 
 import com.example.captain.compass.util.LogTag;
@@ -32,7 +34,6 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         application = this;
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbackImpl());
         ZXingLibrary.initDisplayOpinion(this);
         CrashReport.initCrashReport(this, "8e7430372d", false);
         CrashReport.setAppVersion(this, BuildConfig.VERSION_CODE + "(" + BuildConfig.BUILD_VERSION + ")");

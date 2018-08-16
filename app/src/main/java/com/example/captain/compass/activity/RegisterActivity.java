@@ -2,16 +2,19 @@ package com.example.captain.compass.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +24,12 @@ import android.widget.EditText;
 
 import com.example.captain.compass.Application;
 import com.example.captain.compass.R;
+import com.example.captain.compass.bean.Register;
+import com.example.captain.compass.constant.Enum;
+import com.example.captain.compass.databinding.ActivityRegisterBinding;
+import com.example.captain.compass.util.LogTag;
 import com.example.captain.compass.util.SPHelper;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +50,8 @@ public class RegisterActivity extends BaseActivity {
 
     @BindView(R.id.btn_get_captcha)
     Button btnGetCaptcha;
+    private ActivityRegisterBinding binding;
+    private Register register;
 
     public static void launchActivity(Context context) {
         context.startActivity(new Intent(context, RegisterActivity.class));
@@ -50,11 +60,12 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
+        register = new Register("135", "123456", "ES3G");
+        binding.setRe(register);
         ButterKnife.bind(this);
         initToolbar();
         setDisplayHomeAsUpEnabled();
-        ContentResolver contentResolver = getContentResolver();
 
     }
 
@@ -119,5 +130,9 @@ public class RegisterActivity extends BaseActivity {
 //        valueAnimator.setDuration(59 * 1000);
 //
 //        valueAnimator.start();
+    }
+
+    public void setDay(Enum.Day day){
+
     }
 }
